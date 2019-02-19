@@ -6,7 +6,7 @@ public class main {
 
     public static void main(String args[]){
         double[] values = readInValues();
-        mergeSortRecursive(values);
+        selectionSort(values);
         for (int i = 0; i < values.length; i++){
             System.out.println(values[i]);
         }
@@ -249,7 +249,24 @@ public class main {
 
 
     public static double[] selectionSort(double a[]) {
-        return null;
+        int n = a.length;
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n-1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i+1; j < n; j++)
+                if (a[j] < a[min_idx])
+                    min_idx = j;
+
+            // Swap the found minimum element with the first
+            // element
+            double temp = a[min_idx];
+            a[min_idx] = a[i];
+            a[i] = temp;
+        }
+        return a;
     }
 
 }
