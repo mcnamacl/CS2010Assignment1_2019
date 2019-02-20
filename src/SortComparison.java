@@ -278,38 +278,30 @@ Time: 1.51263. Function: mergeSortIterative.
         }
         int mid = low + (high - low) / 2;
         mergeSortRecursive(a, b, low, mid);
-        mergeSortRecursive(a, b, mid+1, high);
+        mergeSortRecursive(a, b, mid + 1, high);
         merge(a, b, low, mid, high);
     }
 
-    private static void merge(double[] a, double[] aux, int lo, int mid, int hi) {
-        for (int i = lo; i <= hi; i++) {
-            aux[i] = a[i];
+    private static void merge(double[] a, double[] b, int low, int mid, int high) {
+        for (int i = low; i <= high; i++) {
+            b[i] = a[i];
         }
-        int i = lo;
+        int i = low;
         int j = mid + 1;
-        for (int x = lo; x <= hi; x++) {
+        for (int counter = low; counter <= high; counter++) {
             if (i > mid) {
-                a[x] = aux[j++];
-            } else if (j > hi) {
-                a[x] = aux[i++];
-            } else if (aux[j] < aux[i]) {
-                a[x] = aux[j++];
+                a[counter] = b[j++];
+            } else if (j > high) {
+                a[counter] = b[i++];
+            } else if (b[j] < b[i]) {
+                a[counter] = b[j++];
             } else {
-                a[x] = aux[i++];
+                a[counter] = b[i++];
             }
         }
     }
 
-    /**
-     * Sorts an array of doubles using Merge Sort. This method is static, thus it
-     * can be called as SortComparison.sort(a)
-     *
-     * @param a:
-     *            An unsorted array of doubles.
-     * @return array sorted in ascending order
-     *
-     */
+
     /**
      * Sorts an array of doubles using iterative implementation of Merge Sort. This
      * method is static, thus it can be called as SortComparison.sort(a)
