@@ -17,8 +17,9 @@ public class SortComparison {
 	}
 
 
-	 Answers: a. Insertion sort. This is due to the fact it has a worst case
-	  complexity of O(n^2).
+	 Answers:
+	  a. Insertion sort. This is due to the fact it has a worst case
+	     complexity of O(n^2).
 
 	  b. Insertion sort. As when the array is already sorted it has no need to go into the nested while function.
 
@@ -234,23 +235,23 @@ Time: 1.51263. Function: mergeSortIterative.
         return a;
     }
 
-    private static int partition(double arr[], int begin, int end) {
-        double pivot = arr[end];
+    private static int partition(double a[], int begin, int end) {
+        double pivot = a[end];
         int i = (begin - 1);
 
         for (int j = begin; j < end; j++) {
-            if (arr[j] <= pivot) {
+            if (a[j] <= pivot) {
                 i++;
 
-                double swapTemp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = swapTemp;
+                double swapTemp = a[i];
+                a[i] = a[j];
+                a[j] = swapTemp;
             }
         }
 
-        double swapTemp = arr[i + 1];
-        arr[i + 1] = arr[end];
-        arr[end] = swapTemp;
+        double swapTemp = a[i + 1];
+        a[i + 1] = a[end];
+        a[end] = swapTemp;
 
         return i + 1;
     }
@@ -266,20 +267,19 @@ Time: 1.51263. Function: mergeSortIterative.
      */
 
     static double[] mergeSortRecursive(double a[]) {
-        // todo: implement the sort
-        double[] aux = new double[a.length];
-        mergeSortRecursive(a, aux, 0, a.length - 1);
+        double[] b = new double[a.length];
+        mergeSortRecursive(a, b, 0, a.length - 1);
         return a;
     }
 
-    private static void mergeSortRecursive(double[] a, double[] aux, int lo, int hi) {
-        if (hi <= lo) {
+    private static void mergeSortRecursive(double[] a, double[] b, int low, int high) {
+        if (high <= low) {
             return;
         }
-        int mid = lo + (hi - lo) / 2;
-        mergeSortRecursive(a, aux, lo, mid);
-        mergeSortRecursive(a, aux, mid + 1, hi);
-        merge(a, aux, lo, mid, hi);
+        int mid = low + (high - low) / 2;
+        mergeSortRecursive(a, b, low, mid);
+        mergeSortRecursive(a, b, mid+1, high);
+        merge(a, b, low, mid, high);
     }
 
     private static void merge(double[] a, double[] aux, int lo, int mid, int hi) {
@@ -320,12 +320,11 @@ Time: 1.51263. Function: mergeSortIterative.
      *         order.
      */
     static double[] mergeSortIterative(double a[]) {
-        // todo: implement the sort
         int length = a.length;
-        double[] aux = new double[length];
+        double[] b = new double[length];
         for (int subSize = 1; subSize < length; subSize = subSize + subSize) {
-            for (int lo = 0; lo < length - subSize; lo += subSize + subSize) {
-                merge(a, aux, lo, lo + subSize - 1, Math.min(lo + subSize + subSize - 1, length - 1));
+            for (int low = 0; low < length - subSize; low += subSize + subSize) {
+                merge(a, b, low, low + subSize - 1, Math.min(low + subSize + subSize - 1, length - 1));
             }
         }
         return a;
