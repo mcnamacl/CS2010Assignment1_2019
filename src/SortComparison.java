@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class SortComparison {
 
-	/*public static void main(String args[]) {
+/*	public static void main(String args[]) {
 		goThroughValues("C:\\Users\\mcnam\\Documents\\GitHub\\assignment\\src\\numbers10.txt", 10);
 		goThroughValues("C:\\Users\\mcnam\\Documents\\GitHub\\assignment\\src\\numbers100.txt", 100);
 		goThroughValues("C:\\Users\\mcnam\\Documents\\GitHub\\assignment\\src\\numbers1000.txt", 1000);
@@ -16,79 +16,106 @@ public class SortComparison {
 		goThroughValues("C:\\Users\\mcnam\\Documents\\GitHub\\assignment\\src\\numbersSorted1000.txt", 1000);
 	}
 
-	numbers10.txt
-	Time: .00157. Function: insertionSort.
-	Time: .00233. Function: selectionSort.
-	Time: .00327. Function: quickSort.
-	Time: .00490. Function: mergeSortRecursive.
-	Time: .05773. Function: mergeSortIterative.
 
-	numbers100.txt
-	Time: .02030. Function: insertionSort.
-	Time: .08883. Function: selectionSort.
-	Time: .02613. Function: quickSort.
-	Time: .04813. Function: mergeSortRecursive.
-	Time: .03757. Function: mergeSortIterative.
+	 Answers: a. Insertion sort. This is due to the fact it has a worst case
+	  complexity of O(n^2).
 
-	numbers1000.txt
-	Time: 1.82283. Function: insertionSort.
-	Time: 2.04397. Function: selectionSort.
-	Time: .20707. Function: quickSort.
-	Time: .17123. Function: mergeSortRecursive.
-	Time: .20930. Function: mergeSortIterative.
+	  b. Insertion sort. As when the array is already sorted it has no need to go into the nested while function.
 
-	numbers1000Duplicates.txt
-	Time: 2.42857. Function: insertionSort.
-	Time: .37067. Function: selectionSort.
-	Time: .06587. Function: quickSort.
-	Time: .09947. Function: mergeSortRecursive.
-	Time: .10887. Function: mergeSortIterative.
+	  c. Quick sort is the worst and Merge sort recursive is the best in terms of scalability.
 
-	numbersNearlyOrdered1000.txt
-	Time: .01520. Function: insertionSort.
-	Time: .33277. Function: selectionSort.
-	Time: .05220. Function: quickSort.
-	Time: .06943. Function: mergeSortRecursive.
-	Time: .08160. Function: mergeSortIterative.
+	  d. Yes however only when it got to large nearly sorted or already sorted data sets.
 
-	numbersReverse1000.txt
-	Time: .09130. Function: insertionSort.
-	Time: .43907. Function: selectionSort.
-	Time: .48780. Function: quickSort.
-	Time: .06170. Function: mergeSortRecursive.
-	Time: .07980. Function: mergeSortIterative.
+	  e. numbers10: insertionSort. numbers100: quickSort. numbers1000: mergeSortRecursive.
+	     numbers1000Duplicates: quickSort. numbersNearlyOrdered1000: mergeSortRecursive.
+	     numbersReverse1000: mergeSortRecursive. numbersSorted1000: insertionSort.
 
-	numbersSorted1000.txt
-	Time: 1.04353. Function: insertionSort.
-	Time: .35607. Function: selectionSort.
-	Time: .60530. Function: quickSort.
-	Time: .04613. Function: mergeSortRecursive.
-	Time: .12733. Function: mergeSortIterative.
+numbers10.txt
+Time: .00327. Function: insertionSort.
+Time: .00407. Function: selectionSort.
+Time: .00527. Function: quickSort.
+Time: .00777. Function: mergeSortRecursive.
+Time: .03607. Function: mergeSortIterative.
+
+numbers100.txt
+Time: .10263. Function: insertionSort.
+Time: .17607. Function: selectionSort.
+Time: .05380. Function: quickSort.
+Time: .06037. Function: mergeSortRecursive.
+Time: .06250. Function: mergeSortIterative.
+
+numbers1000.txt
+Time: 5.63007. Function: insertionSort.
+Time: 2.91903. Function: selectionSort.
+Time: .22293. Function: quickSort.
+Time: .17730. Function: mergeSortRecursive.
+Time: .19740. Function: mergeSortIterative.
+
+numbers1000Duplicates.txt
+Time: 1.27903. Function: insertionSort.
+Time: .65527. Function: selectionSort.
+Time: .08757. Function: quickSort.
+Time: .21640. Function: mergeSortRecursive.
+Time: .23650. Function: mergeSortIterative.
+
+numbersNearlyOrdered1000.txt
+Time: .09577. Function: insertionSort.
+Time: .60413. Function: selectionSort.
+Time: .09867. Function: quickSort.
+Time: .08493. Function: mergeSortRecursive.
+Time: .20260. Function: mergeSortIterative.
+
+numbersReverse1000.txt
+Time: 1.08690. Function: insertionSort.
+Time: 1.26377. Function: selectionSort.
+Time: 1.05100. Function: quickSort.
+Time: .06823. Function: mergeSortRecursive.
+Time: .11487. Function: mergeSortIterative.
+
+numbersSorted1000.txt
+Time: .00370. Function: insertionSort.
+Time: .68617. Function: selectionSort.
+Time: 1.00333. Function: quickSort.
+Time: .05437. Function: mergeSortRecursive.
+Time: 1.51263. Function: mergeSortIterative.
+
+
 
 	public static void goThroughValues(String input, int length) {
 		double[] values = readInValues(input, length);
 		double[] tmp = values.clone();
+
 		double timeInsertion = 0;
 		double timeSelection = 0;
 		double timeQuick = 0;
 		double timeMergeSortR = 0;
 		double timeMergeSortI = 0;
+
 		System.out.println(input);
+		double tmpTime = 0.0;
+
 		for (int i = 0; i < 3; i++) {
-			timeInsertion = timeInsertion + getTime(values, "insertionSort");
+			values = Arrays.copyOf(tmp, tmp.length);
+			tmpTime = getTime(values, "insertionSort");
+			timeInsertion = timeInsertion + tmpTime;
 
-			values = tmp.clone();
-			timeSelection = timeSelection + getTime(values, "selectionSort");
+			values = Arrays.copyOf(tmp, tmp.length);
+			tmpTime = getTime(values, "selectionSort");
+			timeSelection = timeSelection + tmpTime;
 
-			values = tmp.clone();
-			timeQuick = timeQuick + getTime(values, "quickSort");
+			values = Arrays.copyOf(tmp, tmp.length);
+			tmpTime = getTime(values, "quickSort");
+			timeQuick = timeQuick + tmpTime;
 
-			values = tmp.clone();
-			timeMergeSortR = timeMergeSortR + getTime(values, "mergeSortRecursive");
+			values = Arrays.copyOf(tmp, tmp.length);
+			tmpTime = getTime(values, "mergeSortRecursive");
+			timeMergeSortR = timeMergeSortR + tmpTime;
 
-			values = tmp.clone();
-			timeMergeSortI = timeMergeSortI + getTime(values, "mergeSortIterative");
+			values = Arrays.copyOf(tmp, tmp.length);
+			tmpTime = getTime(values, "mergeSortIterative");
+			timeMergeSortI = timeMergeSortI + tmpTime;
 		}
+
 		averageTime(timeInsertion, "insertionSort");
 		averageTime(timeSelection, "selectionSort");
 		averageTime(timeQuick, "quickSort");
@@ -97,7 +124,7 @@ public class SortComparison {
 	}
 
 	public static void averageTime(double time, String funcType) {
-		time = time/3;
+		time = time / 3;
 		DecimalFormat numberFormat = new DecimalFormat("#.00000");
 		System.out.println("Time: " + numberFormat.format(time) + ". Function: " + funcType + ".");
 	}
@@ -165,19 +192,17 @@ public class SortComparison {
      * @return array sorted in ascending order.
      *
      */
-    public static double[] insertionSort(double a[]) {
-        int length = a.length;
-        if (length > 0) {
-            for (int i = 1; i < length; ++i) {
-                double key = a[i];
-                int j = i - 1;
-
-                while (j >= 0 && a[j] > key) {
-                    a[j + 1] = a[j];
-                    j--;
-                }
-                a[j + 1] = key;
+    static double[] insertionSort(double a[]) {
+        double index;
+        int j;
+        for (int i = 1; i < a.length; i++) {
+            index = a[i];
+            j = i;
+            while ((j > 0) && (a[j - 1] > index)) {
+                a[j] = a[j - 1];
+                j = j - 1;
             }
+            a[j] = index;
         }
         return a;
     }
