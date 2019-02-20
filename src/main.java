@@ -147,101 +147,75 @@ public class main {
 
     static void mergeSort(double arr[], int n)
     {
+        int currSize;
 
-        // For current size of subarrays to
-        // be merged curr_size varies from
-        // 1 to n/2
-        int curr_size;
+        int leftStart;
 
-        // For picking starting index of
-        // left subarray to be merged
-        int left_start;
-
-
-        // Merge subarrays in bottom up
-        // manner. First merge subarrays
-        // of size 1 to create sorted
-        // subarrays of size 2, then merge
-        // subarrays of size 2 to create
-        // sorted subarrays of size 4, and
-        // so on.
-        for (curr_size = 1; curr_size <= n-1;
-             curr_size = 2*curr_size)
+        for (currSize = 1; currSize <= n-1;
+             currSize = 2*currSize)
         {
 
-            // Pick starting point of different
-            // subarrays of current size
-            for (left_start = 0; left_start < n-1;
-                 left_start += 2*curr_size)
+
+            for (leftStart = 0; leftStart < n-1;
+                 leftStart += 2*currSize)
             {
-                // Find ending point of left
-                // subarray. mid+1 is starting
-                // point of right
-                int mid = left_start + curr_size - 1;
 
-                int right_end = Math.min(left_start
-                        + 2*curr_size - 1, n-1);
+                int mid = leftStart + currSize - 1;
 
-                // Merge Subarrays arr[left_start...mid]
-                // & arr[mid+1...right_end]
-                merge(arr, left_start, mid, right_end);
+                int right_end = Math.min(leftStart
+                        + 2*currSize - 1, n-1);
+
+                merge(arr, leftStart, mid, right_end);
             }
         }
     }
 
-    /* Function to merge the two haves arr[l..m] and
-    arr[m+1..r] of array arr[] */
-    static void merge(double arr[], int l, int m, int r)
+    static void merge(double a[], int left, int mid, int right)
     {
         int i, j, k;
-        int n1 = m - l + 1;
-        int n2 = r - m;
+        int length1 = mid - left + 1;
+        int length2 = right - mid;
 
-        /* create temp arrays */
-        double L[] = new double[n1];
-        double R[] = new double[n2];
+        double l[] = new double[length1];
+        double r[] = new double[length2];
 
-        /* Copy data to temp arrays L[]
-        and R[] */
-        for (i = 0; i < n1; i++)
-            L[i] = arr[l + i];
-        for (j = 0; j < n2; j++)
-            R[j] = arr[m + 1+ j];
+        for (i = 0; i < length1; i++) {
+            l[i] = a[left + i];
+        }
+        for (j = 0; j < length2; j++) {
+            r[j] = a[mid + 1 + j];
+        }
 
-        /* Merge the temp arrays back into
-        arr[l..r]*/
         i = 0;
         j = 0;
-        k = l;
-        while (i < n1 && j < n2)
+        k = left;
+        while (i < length1 && j < length2)
         {
-            if (L[i] <= R[j])
+            if (l[i] <= r[j])
             {
-                arr[k] = L[i];
+                a[k] = l[i];
                 i++;
             }
             else
             {
-                arr[k] = R[j];
+                a[k] = r[j];
                 j++;
             }
             k++;
         }
 
-        /* Copy the remaining elements of
-        L[], if there are any */
-        while (i < n1)
+        while (i < length1)
         {
-            arr[k] = L[i];
+            a[k] = l[i];
             i++;
             k++;
         }
 
         /* Copy the remaining elements of
         R[], if there are any */
-        while (j < n2)
+        while (j < length2)
         {
-            arr[k] = R[j];
+            a[k] = r[j];
             j++;
             k++;
         }
@@ -249,21 +223,17 @@ public class main {
 
 
     public static double[] selectionSort(double a[]) {
-        int n = a.length;
+        int length = a.length;
 
-        // One by one move boundary of unsorted subarray
-        for (int i = 0; i < n-1; i++)
+        for (int i = 0; i < length-1; i++)
         {
-            // Find the minimum element in unsorted array
-            int min_idx = i;
-            for (int j = i+1; j < n; j++)
-                if (a[j] < a[min_idx])
-                    min_idx = j;
+            int minIndex = i;
+            for (int j = i+1; j < length; j++)
+                if (a[j] < a[minIndex])
+                    minIndex = j;
 
-            // Swap the found minimum element with the first
-            // element
-            double temp = a[min_idx];
-            a[min_idx] = a[i];
+            double temp = a[minIndex];
+            a[minIndex] = a[i];
             a[i] = temp;
         }
         return a;
