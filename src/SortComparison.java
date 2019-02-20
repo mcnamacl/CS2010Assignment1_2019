@@ -16,7 +16,7 @@ public class SortComparison {
 		goThroughValues("C:\\Users\\mcnam\\Documents\\GitHub\\assignment\\src\\numbersSorted1000.txt", 1000);
 	}
 
-	src\numbers10.txt
+	numbers10.txt
 	Time: .00157. Function: insertionSort.
 	Time: .00233. Function: selectionSort.
 	Time: .00327. Function: quickSort.
